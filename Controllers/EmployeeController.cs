@@ -28,5 +28,17 @@ namespace gym_management_api.Controllers
             }
             return Ok(response);
         }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<ServiceResponse<int>>> login(EmployeeLoginDTO employee)
+        {
+            var response = await this.EmployeeRepository.login(employee.Username, employee.Password);
+            if(!response.Success)
+            {
+                return BadRequest(response);
+            }
+            return Ok(response);
+        }
+
     }
 }
